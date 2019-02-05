@@ -22,7 +22,7 @@ These are the owners of the hardware/datacenter who wish to run computations tha
 
 ### Solution Concept
 
-In order to utilize the slack resources within a cluster, we would be deploying a BOINC based CentOS image as a DaemonSet on OpenShift cluster. A DaemonSet essentially creates instance(s) of the required container on selected or all the nodes of the cluster on which DaemonSet is deployed. The DaemonSet would consist of the following:
+In order to utilize the slack resources within a cluster, we would be deploying a BOINC based CentOS image as a DaemonSet on OpenShift cluster. A DaemonSet essentially deploys instance(s) of the required container on selected or all the nodes (based on your configuration) of the cluster on which DaemonSet is deployed. The DaemonSet would consist of the following:
 * BOINC based application as a Docker image
 * Dynamic resource utilization through a script that scales the resources utilized by the instance(s) of the BOINC application
 
