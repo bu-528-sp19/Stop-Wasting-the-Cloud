@@ -69,7 +69,6 @@ Release planning section describes how the project will deliver incremental sets
 
 **Temporary sprints:**
 
-Temporary sprints:
 * Sprint 1 (February 4 - 14) 
 
 Research and learn about Kubernetes, Docker, BOINC, etc.
