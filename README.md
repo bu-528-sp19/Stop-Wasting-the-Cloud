@@ -48,6 +48,7 @@ Depending upon the free space available and the requirements of the other applic
 In order to achieve maximum utilization of the cloud server resources, the following two strategies can be employed:
 * Having a single BOINC app per node that consumes all the slack resources on that node
 * Having multiple BOINC apps per node that divide the slack resources on a node between themselves
+
 Further study on the cloud infrastructure as well as the effect of performance of the application with the amount of computational resources consumed would enable us to decide which of the above two strategies would work best for our case.
 
 The division of slack resources within instances of an application hosted on a node would depend on the following factors:
