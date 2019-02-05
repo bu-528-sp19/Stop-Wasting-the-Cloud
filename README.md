@@ -44,6 +44,7 @@ Depending upon the free space available and the requirements of the other applic
 * Tuning at the Kubernetes and BOINC tiers in order to scale the unused resources to the existing jobs
 * Automated sizing which would enable us to create/kill instances of containers depending upon the available resources
 * Allowing jobs to utilize persistent storage so that they can resume from their last state in case they get killed before completion
+
 In order to achieve maximum utilization of the cloud server resources, the following two strategies can be employed:
 * Having a single BOINC app per node that consumes all the slack resources on that node
 * Having multiple BOINC apps per node that divide the slack resources on a node between themselves
