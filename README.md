@@ -82,9 +82,9 @@ Build a first draft of the container and get access to MOC
 * Sprint 5 (April 5 - 18): Work towards stretch goals if possible.
 
 ### Contributors:
-Anshu Goel
-Jhukhirtha Marhi Arokiasamy
-Sahil Gupta
-Sidharth Bakshi
-Vedant Mahabaleshwarkar
+*Anshu Goel
+*Jhukhirtha Marhi Arokiasamy
+*Sahil Gupta
+*Sidharth Bakshi
+*Vedant Mahabaleshwarkar
 
