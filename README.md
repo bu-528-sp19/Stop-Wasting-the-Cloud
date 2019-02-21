@@ -82,8 +82,8 @@ Build a first draft of the container and get access to MOC
 * Sprint 5 (April 5 - 18): Work towards stretch goals if possible.
 
 ### Contributors:
-* Anshu GoelSprint 2 (February 15 - 28) : Deploy BOINC based CentOs image as a daemonset in OpenShift cluster
-* Jhukhirtha Marhi ArokiasamySprint 3 (March 1 - 21) : Define the algorithm for resource allocation and scaling.
+* Anshu Goel
+* Jhukhirtha Marhi Arokiasamy.
 * Sahil Gupta
 * Sidharth Bakshi
 * Vedant Mahabaleshwarkar
