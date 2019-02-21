@@ -3,6 +3,8 @@ MAINTAINER Anshu Goel
 
 RUN yum -y install epel-release &&\
 yum -y install boinc-client &&\
+#chmod +rw+rw+rw+ /var/lib/BOINC/ * . * &&\
 yum -y clean all
-COPY /global_prefs_override.xml /
-CMD boinc --attach_project ${boincurl} ${boinckey}
+#chmod -rw-rw-rw- / &&\
+
+CMD boinc --attach_project ${boincurl} ${boinckey} --allow_multiple_clients --allow_remote_gui_rpc

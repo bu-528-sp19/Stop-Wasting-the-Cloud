@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: swc-openshift
+spec:
+  selector:
+    matchLabels:
+      name: anshu
+  template:
+    metadata:
+      labels:
+        name: anshu
+    spec:
+      containers:
+      - name: anshugoel
+        image: anshugoe/centos-boinc
+        ports:
+        - containerPort: 80
+        env:
+        - name: boincurl
+          valueFrom:
+            configMapKeyRef:
+              name: credentials
+              key: cred.url
+        - name: boinckey
+          valueFrom:
+            configMapKeyRef:
+              name: credentials
+              key: cred.key
+ 

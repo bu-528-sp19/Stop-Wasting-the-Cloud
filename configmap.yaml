@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: credentials
+data:
+  cred.url: www.worldcommunitygrid.org
+  cred.key: d508a234e9987f368dcb41968ea69ea6
