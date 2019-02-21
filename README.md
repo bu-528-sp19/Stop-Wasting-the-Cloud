@@ -81,5 +81,10 @@ Build a first draft of the container and get access to MOC
 * Sprint 4 (March 22 - April 4) : Fine-tune the algorithm for resource allocation and scaling.
 * Sprint 5 (April 5 - 18): Work towards stretch goals if possible.
 
-
+### Contributors:
+Anshu Goel
+Jhukhirtha Marhi Arokiasamy
+Sahil Gupta
+Sidharth Bakshi
+Vedant Mahabaleshwarkar
 
