@@ -1,5 +1,5 @@
 FROM centos:7
-MAINTAINER Anshu Goel
+MAINTAINER Jhukhirtha Marhi
 
 RUN yum -y install epel-release &&\
 yum -y install boinc-client &&\
