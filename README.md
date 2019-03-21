@@ -64,7 +64,7 @@ Stretch goals for the project include:
 Release planning section describes how the project will deliver incremental sets of features and functions in a series of releases to completion. Identification of user stories associated with iterations that will ease/guide sprint planning sessions is encouraged. Higher level details for the first iteration is expected.
 
 
-** Sprint 1 (February 4 - 14) ** 
+**Sprint 1 (February 4 - 14)** 
 
 * Research and learn about Kubernetes, Docker, BOINC, etc.
  
@@ -72,7 +72,7 @@ Release planning section describes how the project will deliver incremental sets
 
 * Build a first draft of the container and get access to MOC 
 
-** Sprint 2 (February 15 - 28) **
+**Sprint 2 (February 15 - 28)**
 
 * Deploy BOINC based CentOs image as a daemonset in OpenShift cluster. 
 
@@ -82,7 +82,7 @@ Release planning section describes how the project will deliver incremental sets
 
 * Assign Persistent Volumes to pods. (This was put on hold as Openshift assigns one Persistent Volume per Daemonset while we want one Persistent Volume per pod.)
 
-** Sprint 3 (March 1 - 21) **
+**Sprint 3 (March 1 - 21)**
 
 * Research Quality of Service tiers. 
 
@@ -90,7 +90,7 @@ Release planning section describes how the project will deliver incremental sets
 
 * Deploy Daemonset on various configurations across Qos tiers and benchmark results to understand which QoS should be used for the deployment of our project. 
 
-** Sprint 4 (March 22 - April 4) **
+**Sprint 4 (March 22 - April 4)**
 
 * Come to a conclusion as to which Qos tier works best, and deploy all future tests on that QoS tier.
 
@@ -99,7 +99,7 @@ Release planning section describes how the project will deliver incremental sets
 * Deploy non-boinc jobs in a manner that we can understand if our boinc jobs are affecting the way the non-boinc jobs perform.
 
 
-**  Sprint 5 (April 5 - 18)**
+**Sprint 5 (April 5 - 18)**
 
 * Work towards stretch goals if possible.
 
