@@ -64,24 +64,44 @@ Stretch goals for the project include:
 Release planning section describes how the project will deliver incremental sets of features and functions in a series of releases to completion. Identification of user stories associated with iterations that will ease/guide sprint planning sessions is encouraged. Higher level details for the first iteration is expected.
 
 
-* Sprint 1 (February 4 - 14) 
+** Sprint 1 (February 4 - 14) ** 
 
-Research and learn about Kubernetes, Docker, BOINC, etc.
+* Research and learn about Kubernetes, Docker, BOINC, etc.
  
-Consult mentors on multiple possible scaling techniques and their feasibility and efficiency.
+* Consult mentors on multiple possible scaling techniques and their feasibility and efficiency.
 
-Build a first draft of the container and get access to MOC 
-* Sprint 2 (February 15 - 28) : 
-Deploy BOINC based CentOs image as a daemonset in OpenShift cluster. 
+* Build a first draft of the container and get access to MOC 
 
-Research the Pros and Cons of deploying our image as a Daemonset vs using the Kubernetes scheduler. 
+** Sprint 2 (February 15 - 28) **
 
-Pass the World Community Grid credentials to the BOINC image as secrets on Openshift instead of hard-coding them in the image. 
+* Deploy BOINC based CentOs image as a daemonset in OpenShift cluster. 
+
+* Research the Pros and Cons of deploying our image as a Daemonset vs using the Kubernetes scheduler. 
+
+* Pass the World Community Grid credentials to the BOINC image as secrets on Openshift instead of hard-coding them in the image. 
+
+* Assign Persistent Volumes to pods. (This was put on hold as Openshift assigns one Persistent Volume per Daemonset while we want one Persistent Volume per pod.)
+
+** Sprint 3 (March 1 - 21) **
+
+* Research Quality of Service tiers. 
+
+* Implement a start-up script to extract the cgroup memory limits enforced on the container and communicate the values to BOINC so that it does not exceed memory consumption beyond the memory limits. 
+
+* Deploy Daemonset on various configurations across Qos tiers and benchmark results to understand which QoS should be used for the deployment of our project. 
+
+** Sprint 4 (March 22 - April 4) **
+
+* Come to a conclusion as to which Qos tier works best, and deploy all future tests on that QoS tier.
+
+* Deploy non-boinc jobs to simulate primary applications on the cluster which will contend for resources. 
+
+* Deploy non-boinc jobs in a manner that we can understand if our boinc jobs are affecting the way the non-boinc jobs perform.
 
 
-* Sprint 3 (March 1 - 21) : Define the algorithm for resource allocation and scaling.
-* Sprint 4 (March 22 - April 4) : Fine-tune the algorithm for resource allocation and scaling.
-* Sprint 5 (April 5 - 18): Work towards stretch goals if possible.
+**  Sprint 5 (April 5 - 18)**
+
+* Work towards stretch goals if possible.
 
 ### Contributors:
 * Anshu Goel
