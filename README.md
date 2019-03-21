@@ -42,12 +42,8 @@ The application will be deployed on the cloud server as Docker containers. The c
 Depending upon the free space available and the requirements of the other applications within the cluster, our containers will scale accordingly in order to minimize idle system resources. This will be handled by a script that allocates resources to the BOINC application by:
 
 * Tuning at the Kubernetes and BOINC tiers in order to scale the unused resources to the existing jobs
-* Automated sizing which would enable us to create/kill instances of containers depending upon the available resources
+* Looking at the cgroup memory limits assigned to the Daemonset and ensuring that the BOINC containers do not take more memory than the assigned limit so as to not affect other applications on the cluster. 
 * Allowing jobs to utilize persistent storage so that they can resume from their last state in case they get killed before completion
-
-In order to achieve maximum utilization of the cloud server resources, the following two strategies can be employed:
-* Having a single BOINC app per node that consumes all the slack resources on that node
-* Having multiple BOINC apps per node that divide the slack resources on a node between themselves
 
 Further study on the cloud infrastructure as well as the effect of performance of the application with the amount of computational resources consumed would enable us to decide which of the above two strategies would work best for our case.
 
@@ -67,7 +63,6 @@ Stretch goals for the project include:
 ### Release Planning:
 Release planning section describes how the project will deliver incremental sets of features and functions in a series of releases to completion. Identification of user stories associated with iterations that will ease/guide sprint planning sessions is encouraged. Higher level details for the first iteration is expected.
 
-**Temporary sprints:**
 
 * Sprint 1 (February 4 - 14) 
 
@@ -76,7 +71,14 @@ Research and learn about Kubernetes, Docker, BOINC, etc.
 Consult mentors on multiple possible scaling techniques and their feasibility and efficiency.
 
 Build a first draft of the container and get access to MOC 
-* Sprint 2 (February 15 - 28) : Deploy BOINC based CentOs image as a daemonset in OpenShift cluster
+* Sprint 2 (February 15 - 28) : 
+Deploy BOINC based CentOs image as a daemonset in OpenShift cluster. 
+
+Research the Pros and Cons of deploying our image as a Daemonset vs using the Kubernetes scheduler. 
+
+Pass the World Community Grid credentials to the BOINC image as secrets on Openshift instead of hard-coding them in the image. 
+
+
 * Sprint 3 (March 1 - 21) : Define the algorithm for resource allocation and scaling.
 * Sprint 4 (March 22 - April 4) : Fine-tune the algorithm for resource allocation and scaling.
 * Sprint 5 (April 5 - 18): Work towards stretch goals if possible.
