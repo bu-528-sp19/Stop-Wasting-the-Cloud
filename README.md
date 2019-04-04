@@ -55,7 +55,7 @@ The division of slack resources within instances of an application hosted on a n
 The containers scale according to the available slack resources on the cluster
 
 ### Acceptance criteria
-The minimum viable product includes deployment of a container image that scales the resources allocated to the BOINC container depending upon the available resources.
+The minimum viable product includes deployment of a container image that allocates resources to the BOINC container depending upon the available resources.
 
 Stretch goals for the project include:
 * Use a Kubernetes operator to monitor the resources used by the containers and hence scale it down to avoid getting killed
