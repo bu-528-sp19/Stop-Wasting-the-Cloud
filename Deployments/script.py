@@ -2,7 +2,7 @@ import subprocess
 import os
 import time
 
-
+//independently oc login first
 sleep_time = 120
 
 deployment_primaries = ["primary-70-b-60.yaml", "primary-70-no-ds.yaml", "-"]
