@@ -13,10 +13,9 @@ spec:
       labels:
         app: wcg
     spec:
-      nodeName: k007
       containers:
       - name: latest
-        image: siddharthbakshi/wcg_centos
+        image: vedantm/sysbench
         ports:
           - containerPort: 8080
         resources:
