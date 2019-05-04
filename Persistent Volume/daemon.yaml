@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: cgrouptest
+spec:
+  selector:
+    matchLabels:
+      name: anshu
+  template:
+    metadata:
+      labels:
+        name: anshu
+    spec:
+      containers:
+      - name: anshugoel
+        image: anshugoe/centos-boinc
+        resources:
+          limits:
+            memory: "2000Mi"
+            cpu: "2000m"
+        ports:
+        - containerPort: 80
+        env:
+        - name: boincurl
+          valueFrom:
+            secretKeyRef:
+              name: accountkeys
+              key: url
+        - name: boinckey
+          valueFrom:
+            secretKeyRef:
+              name: accountkeys
+              key: account

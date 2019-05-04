@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: primary-70
+  namespace: bu528-stop-wasting-the-cloud
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wcg
+  template:
+    metadata:
+      labels:
+        app: wcg
+    spec:
+      containers:
+      - name: latest
+        image: vedantm/sysbench
+        ports:
+          - containerPort: 8080
+        resources:
+          requests:
+            cpu: "7"
+            memory: "35Gi"
+          limits:
+            cpu: "7"
+            memory: "35Gi"
