@@ -57,7 +57,7 @@ In nutshell, we have not optimized BOINC currently so that it utilizes all the u
 
 ### Solution Concept
 
-We use BOINC to utilize wasted resource. However, BOINC was developed to run on local machines. It does not perform well when deployed in a container environment. Please find the <a href="https://github.com/BOINC/boinc/issues/3100/">issue</a>issue raised on BOINC community
+We use BOINC to utilize wasted resource. However, BOINC was developed to run on local machines. It does not perform well when deployed in a container environment. Please find the <a href="https://github.com/BOINC/boinc/issues/3100/">issue</a> raised on BOINC community
 We built a solution to extend BOINC so that it works well in a container environment and does not affect the performance of the primary application. 
 
 <p align="center">
