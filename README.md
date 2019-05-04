@@ -1,68 +1,109 @@
 
-####  The purpose of this project is to optimize slack resources for the OpenShift clusters by executing jobs of BOINC based projects. In this project we will be developing an open source proof of concept to optimize slack resource of OpenShift Cluster running on the Massachusetts Open Cloud (MOC) which can be later extended to any public cloud having OpenShift cluster.
-
 
 ### Vision and Goals Of The Project:
-* The goal of this project is to deploy a BOINC based CentOS image on the openshift cluster in the MOC as a daemonset. 
-* Define an algorithm that allows the container to scale dynamically according to the available resources on each node in the OpenShift cluster. This includes allowing the container to scale out to the size of the entire node when resources are available, and to scale down to practically consume nothing, or get killed when the resources are not available. If the container gets killed, it will be able efficiently re-execute when resources are available again.
 
- 
+Traditionally, one application was deployed in 1 host. Developers were unable to deploy multiple applications due to lack of any isolation technology. This architecture wasted large percentage of compute resource. Then came in virtual machines, which allows you to run multiple guest operating system on your host operating system. Well, this isolation technique did utilize large percentage of your compute resources but most of it was actually being utilized for setting up of VM’s. Even after that, there is some percentage of the unutilized resource. Now, we are quickly moving our application into the container environment which allows multiple application to run on host OS itself by providing the needed isolation, which means another large percentage of unutilized resources.
+
+Currently, there is no open source solution which makes use of these unutilized resource and if you are not into a serverless platform, then you are probably renting out cloud space from one of the cloud providers to satisfy the application traffic during peak load. Your application around 80-90% of the time is not at its peak load so you have a lot of unutilized resources and you can put those slack resource to some work by deploying an application that generates revenue like a cryptocurrency miner or contribute to scientific research. For this project, we will be going with the latter.
+
+####  The purpose of this project is to optimize slack resources without affecting the performance of a primary application running in your cluster.
+
+ ### Technologies Used:
+* **Massachusetts Open Cloud**: The MOC is a new production public cloud that is a collaborative effort between higher education, government, non-profit entities, and industry. It is based on the Open Cloud Exchange model.
+* **OpenShift**: OpenShift is an open source container application platform by Red Hat based on top of Docker containers and the Kubernetes container cluster manager for enterprise app development and deployment.
+* **CentOS**: CentOS is an open-source Linux distribution which is similar to Red Hat Enterprise Linux (RHEL) that is widely used as a platform for different deployments.
+* **Docker**: Docker containers wrap up the software and its dependencies into a standardized unit for software development that includes everything it needs to run: code, runtime, system tools, and libraries.
+* **BOINC**: BOINC (Berkeley Open Infrastructure for Network Computing) is an open source middleware system which supports volunteer and grid computing. 
+* **World Community Grid (WCG):** WCG is an effort to create the world's largest public computing grid to tackle scientific research projects that benefit humanity.
+
+<b>Links to the technology used:</b><br>
+  <a href="#">https://massopen.cloud/</a> |
+  <a href="#">https://www.openshift.com/</a> |
+  <a href="#">https://www.centos.org/</a> |
+  <a href="#">https://hub.docker.com/</a> |
+  <a href="#">https://boinc.berkeley.edu/</a> |
+  <a href="#">https://www.worldcommunitygrid.org/discover.action</a> |
+  <br><br>
+
 ### Users/Personas Of The Project:
-There are two users for the project:
-* **OpenShift/Kubernetes clusters:**:
-Organisations/individuals who are using Openshift or Kubernetes cluster and wish to consume the slack resources that they are already paying for by using the unused cycles for running a BOINC based application (eg: computations for the World Community Grid aka WCG).
-* **Cloud server admins:**:
-These are the owners of the hardware/datacenter who wish to run computations that would consume the slack resources of idle nodes that are not mapped to any clients/applications.  
+User should be having OpenShift or Kubernetes cluster. We have specifically identified two groups of users for this project and have tried to handle their concerns:
+* **Developer**:
+For a developer, the most important thing is how easy an application is to deploy. As developer will not be much concerned if unutilized resource is being used or not, we have made sure our application would be easy to deploy with no burden on the developer.
+* **Cluster adminstrator:**:
+ As an administrator, your major concerns are it should not take up the entire cluster and does not affect the performance of other primary applications running on your cluster. We have made sure, the performance of the primary application is not affected in any scenario and has been our top priority
+Other than that, it can be a great area of research and interest to Open Source community since all the technology stack we have used are open source and the project itself is open source and we are open to suggestion and contribution
 
-### Scope and Features Of The Project:
+
+### Scope:
+
+We aim to provide a solution that utilizes most of the unutilized resource of all the nodes running on OpenShift and Kubernetes cluster without affecting the performance of the primary application.
 
 **What will be delivered**:
-* Utilizing slack resources: In here, we will develop a generic algorithm which will be able to tune OpenShift and Kubernetes clusters to run BOINC based projects on their slack resources without affecting other containers running in that cluster.
-* User will not have to configure or worry about how BOINC containers are going to scale or get distributed across the nodes. Scaling of resources for BOINC container will be dynamic.
+* A docker image of BOINC that can be deployed on Openshift clusters which will run as a daemonset to consume slack resources without affecting other applications on the cluster. 
+
+* Examples of deployment configurations in the form of yaml files that will help users deploy our BOINC image according to their requirement. 
+
+**What will not be delivered**:
+* BOINC will not be able to scale down according to dynamic need of primary application but rather it will get suspended 
+
+* Due to unavailability of read-write many persistent volume (PV) on MOC we will not be storing the state of BOINC i.e. if BOINC pod gets killed it will restart the computation again rather than resuming from where it got killed.
+
+In nutshell, we have not optimized BOINC currently so that it utilizes all the unutilized resource but have made sure it will not affect the performance of primary application at any cost
+
+**Features**:
+* We aim to provide a solution that is easy to deploy and does not require separate cluster level maintenance. 
+
+* This solution will be highly scalable and will not depend on the size of the cluster, and will work even if nodes are added and removed from the cluster. 
+
+
 
 ### Solution Concept
 
-In order to utilize the slack resources within a cluster, we would be deploying a BOINC based CentOS image as a DaemonSet on OpenShift cluster. A DaemonSet essentially deploys instance(s) of the required container on selected or all the nodes (based on your configuration) of the cluster on which DaemonSet is deployed. The DaemonSet would consist of the following:
-* BOINC based application as a Docker image
-* Dynamic resource utilization through a script that scales the resources utilized by the instance(s) of the BOINC application
+We use BOINC to utilize wasted resource. However, BOINC was developed to run on local machines. It does not perform well when deployed in a container environment. We built a solution to extend BOINC so that it works well in a container environment and does not affect the performance of the primary application. 
 
-![alt text](https://github.com/bu-528-sp19/Stop-Wasting-the-Cloud/blob/master/Diagram%201.jpeg)
-Slack resources being put to use to run BOINC applications
+<p align="center">
+<img src="https://github.com/Jhukhirtha/Stop-Wasting-the-Cloud/blob/master/swc.gif">
+</p>
 
-**BOINC Based Application:**
+1. Build a docker image that runs BOINC inside a container, which is based on centos
+2. Deploy this docker image as a daemonset. 
+We use a daemonset because it fits our use-case perfectly. A daemonset ensures that a copy of the image runs on each node in the cluster.
+3. Configure BOINC’s in a way that it does not hamper the performance of other application running on the node
 
-BOINC (Berkeley Open Infrastructure for Network Computing) is an open source middleware system which supports volunteer and grid computing. In our case, we will be deploying World Community Grid projects, which are based on the BOINC framework.
+**How we configured BOINC :** 
 
-The application will be deployed on the cloud server as Docker containers. The container will be able to scale according to the resources available to it, which will be handled by the script in the DaemonSet. The credentials required by the application will be stored in a config file.
+* 1. Ensure BOINC respects the Cgroup:
+BOINC runs CPU benchmarking when it starts. It has various fields which can be configured. A detailed explanation can be found in the following link. https://boinc.berkeley.edu/wiki/PreferencesXml. 
 
+For our MVP we configure the below fields:
 
+a. <max_ncpus_pct>100.000000</max_ncpus_pct>
 
-**Dynamic resource utilization:**
+b. <vm_max_used_pct>75.000000</vm_max_used_pct>
 
-Depending upon the free space available and the requirements of the other applications within the cluster, our containers will scale accordingly in order to minimize idle system resources. This will be handled by a script that allocates resources to the BOINC application by:
+We pass these changes to BOINC preference via python script.
 
-* Tuning at the Kubernetes and BOINC tiers in order to scale the unused resources to the existing jobs
-* Looking at the cgroup memory limits assigned to the Daemonset and ensuring that the BOINC containers do not take more memory than the assigned limit so as to not affect other applications on the cluster. 
-* Allowing jobs to utilize persistent storage so that they can resume from their last state in case they get killed before completion
+Total CPU of Node: "/sys/fs/cgroup/cpu/cpu.rt_period_us" is found in this file
 
-Further study on the cloud infrastructure as well as the effect of performance of the application with the amount of computational resources consumed would enable us to decide which of the above two strategies would work best for our case.
+Cgroup cpu limit: /sys/fs/cgroup/cpu/cpu.cfs_quota_us" is found in this file
 
-The division of slack resources within instances of an application hosted on a node would depend on the following factors:
-* The minimum amount of resources required by each to execute successfully
-* The maximum amount of resources to be allowed to an application depending upon the point of diminishing returns (with respect to performance vs resources consumed), if any
+We need both because it has to be passed as percentage to BOINC preference file. We created a “global_prefs_override.xml”. BOINC overrides its default setting if it finds this file exists in the same directory where it starts
 
-![alt text](https://github.com/bu-528-sp19/Stop-Wasting-the-Cloud/blob/master/Diagram%20-%202.jpeg)
-The containers scale according to the available slack resources on the cluster
+* 2. Changing the way BOINC sees node utilization:
+On local machines, since BOINC is running on the same kernel as other applications, it can see all the running processes and utilization. Boinc calculates the process utilization for BOINC-processes and non-BOINC processes and suspends itself if the non-BOINC utilization is high. This way does not work when boinc runs inside a container because it can only see processes running inside the container. However, any process inside a container can see node-level utilization. We use this information to change the way BOINC calculates non-BOINC utilization. 
+
+* Our method:
+Non-boinc utilization = total node utilization - boinc utilization
+
+To simulate existing workload running on the cluster, we have used the Linux utility called sysbench. Sysbench runs in a container on the cluster, acting as the primary workload and BOINC's priority will be to not harm the performance of sysbench. 
 
 ### Acceptance criteria
-The minimum viable product includes deployment of a container image that allocates resources to the BOINC container depending upon the available resources.
-
-Stretch goals for the project include:
-* Use a Kubernetes operator to monitor the resources used by the containers and hence scale it down to avoid getting killed
+* BOINC image that can be successfully deployed on MOC.
+* Utilization of the unused resources of all the nodes in the cluster.
+* Consumption of slack resources without affecting the resources of the existing workload.
+* Suspend itself whenever the primary workload crosses a certain limit specified by the user.
 
 ### Release Planning:
-Release planning section describes how the project will deliver incremental sets of features and functions in a series of releases to completion. Identification of user stories associated with iterations that will ease/guide sprint planning sessions is encouraged. Higher level details for the first iteration is expected.
-
 
 **Sprint 1 (February 4 - 14)** 
 
@@ -74,7 +115,7 @@ Release planning section describes how the project will deliver incremental sets
 
 **Sprint 2 (February 15 - 28)**
 
-* Deploy BOINC based CentOs image as a daemonset in OpenShift cluster. 
+* Deploy BOINC based CentOS image as a daemonset in OpenShift cluster. 
 
 * Research the Pros and Cons of deploying our image as a Daemonset vs using the Kubernetes scheduler. 
 
@@ -101,7 +142,7 @@ Release planning section describes how the project will deliver incremental sets
 
 **Sprint 5 (April 5 - 18)**
 
-* Work towards stretch goals if possible.
+* Make changes in BOINC's source code so that it successfully reads the non-BOINC utilization on the node and suspends accordingly. 
 
 ### Contributors:
 * Anshu Goel
