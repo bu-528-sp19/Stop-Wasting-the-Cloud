@@ -5,13 +5,13 @@
 <p align="center">
 <img src="https://github.com/Jhukhirtha/Stop-Wasting-the-Cloud/blob/master/Poc.jpeg">
 </p>
-Traditionally, one application was deployed in 1 host. Developers were unable to deploy multiple applications due to lack of any isolation technology. This architecture wasted large percentage of compute resource. Then came in virtual machines, which allows you to run multiple guest operating system on your host operating system. Well, this isolation technique did utilize large percentage of your compute resources but most of it was actually being utilized for setting up of VM’s. Even after that, there is some percentage of the unutilized resource. Now, we are quickly moving our application into the container environment which allows multiple application to run on host OS itself by providing the needed isolation, which means another large percentage of unutilized resources.
+Traditionally, one application was deployed in 1 host. Developers were unable to deploy multiple applications due to lack of any isolation technology. This architecture wasted large percentage of compute resource. Then came in virtual machines, which allows you to run multiple guest operating system on your host operating system. Well, this isolation technique did utilize large percentage of your compute resources but most of it was actually being utilized for setting up of VM’s. Never the less, there is some percentage of the unutilized resource here also. Now, we are quickly moving towards container environment which allows multiple application to run on host OS itself by providing the needed isolation, which means another large percentage of unutilized resources.
 
-Currently, there is no open source solution which makes use of these unutilized resource and if you are not into a serverless platform, then you are probably renting out cloud space from one of the cloud providers to satisfy the application traffic during peak load. Your application around 80-90% of the time is not at its peak load so you have a lot of unutilized resources and you can put those slack resource to some work by deploying an application that generates revenue like a cryptocurrency miner or contribute to scientific research. For this project, we will be going with the latter.
+CCurrently, there is no open source solution which makes use of these unutilized resource and if you are not into a serverless platform, then you are probably renting out cloud space from one of the cloud providers to satisfy the application traffic during peak load. Your application around 80-90% of the time is not at its peak load so you have a lot of unutilized resources and you can put those slack resource to some work by deploying an application that generates revenue like a cryptocurrency miner or contribute to scientific research. For this project, we will be going with the latter.
 
 ####  The purpose of this project is to optimize slack resources without affecting the performance of a primary application running in your cluster.
 
- ### Technologies Used:
+ ### Technology Stack:
 * <a href="https://massopen.cloud/">**Massachusetts Open Cloud**</a>: The MOC is a new production public cloud that is a collaborative effort between higher education, government, non-profit entities, and industry. It is based on the Open Cloud Exchange model.
 * <a href="https://www.openshift.com/">**OpenShift**</a>: OpenShift is an open source container application platform by Red Hat based on top of Docker containers and the Kubernetes container cluster manager for enterprise app development and deployment.
 * <a href="https://www.centos.org/">**CentOS**</a>: CentOS is an open-source Linux distribution which is similar to Red Hat Enterprise Linux (RHEL) that is widely used as a platform for different deployments.
@@ -22,10 +22,13 @@ Currently, there is no open source solution which makes use of these unutilized 
 
 ### Users/Personas Of The Project:
 User should be having OpenShift or Kubernetes cluster. We have specifically identified two groups of users for this project and have tried to handle their concerns:
+
 * **Developer**:
-For a developer, the most important thing is how easy an application is to deploy. As developer will not be much concerned if unutilized resource is being used or not, we have made sure our application would be easy to deploy with no burden on the developer.
+For a developer, the most important thing is how easy an application can be deployed. As developer will not be much concerned if unutilized resource is being used or not, we have made sure our application would be easy to deploy with no burden on the developer.
+
 * **Cluster adminstrator:**:
- As an administrator, your major concerns are it should not take up the entire cluster and does not affect the performance of other primary applications running on your cluster. We have made sure, the performance of the primary application is not affected in any scenario and has been our top priority
+As an administrator, your major concerns are it should not take up the entire cluster and does not affect the performance of other primary applications running on your cluster. We have made sure, the performance of the primary application is not affected in any scenario and has been our top priority
+
 Other than that, it can be a great area of research and interest to Open Source community since all the technology stack we have used are open source and the project itself is open source and we are open to suggestion and contribution
 
 
@@ -39,40 +42,40 @@ We aim to provide a solution that utilizes most of the unutilized resource of al
 * Examples of deployment configurations in the form of yaml files that will help users deploy our BOINC image according to their requirement. 
 
 **What will not be delivered**:
-* BOINC will not be able to scale down according to dynamic need of primary application but rather it will get suspended 
+* BOINC will not be able to scale down according to dynamic need of primary application but rather it will get suspended
 
-* Due to unavailability of read-write many persistent volume (PV) on MOC we will not be storing the state of BOINC i.e. if BOINC pod gets killed it will restart the computation again rather than resuming from where it got killed.
+* Due to unavailability of read-write many persistent volume (PV) on MOC. We will not be storing the state of BOINC i.e. if BOINC pod gets killed it will restart the computation again rather than resuming from where it got killed.
 
 In nutshell, we have not optimized BOINC currently so that it utilizes all the unutilized resource but have made sure it will not affect the performance of primary application at any cost
 
 **Features**:
 * We aim to provide a solution that is easy to deploy and does not require separate cluster level maintenance. 
 
-* This solution will be highly scalable and will not depend on the size of the cluster, and will work even if nodes are added and removed from the cluster. 
+* This solution will be highly scalable and will not depend on the size of the cluster, and will work even if nodes are added and removed from the cluster.
 
 
 
 ### Solution Concept
 
-We use BOINC to utilize wasted resource. However, BOINC was developed to run on local machines. It does not perform well when deployed in a container environment. We built a solution to extend BOINC so that it works well in a container environment and does not affect the performance of the primary application. 
+We use BOINC to utilize wasted resource. However, BOINC was developed to run on local machines. It does not perform well when deployed in a container environment. Please find the <a href="https://github.com/BOINC/boinc/issues/3100/">issue</a>issue raised on BOINC community
+We built a solution to extend BOINC so that it works well in a container environment and does not affect the performance of the primary application. 
 
 <p align="center">
 <img src="https://github.com/Jhukhirtha/Stop-Wasting-the-Cloud/blob/master/swc.gif">
 </p>
 
-1. Build a docker image that runs BOINC inside a container, which is based on centos
+1. Built a docker image that runs BOINC inside a container, which is based on centos
 2. Deploy this docker image as a daemonset. 
 We use a daemonset because it fits our use-case perfectly. A daemonset ensures that a copy of the image runs on each node in the cluster.
 3. Configure BOINC’s in a way that it does not hamper the performance of other application running on the node
 
 **How we configured BOINC :** 
 
-* 1. Ensure BOINC respects the Cgroup:
-BOINC runs CPU benchmarking when it starts. It has various fields which can be configured. A detailed explanation can be found in the following link. https://boinc.berkeley.edu/wiki/PreferencesXml. 
+* 1. EEnsure BOINC takes up task according to the Cgroup: BOINC runs CPU benchmarking when it starts and requests task from BOINC server accordingly. It has various fields which can be configured. A detailed explanation can be found in the following <a href="https://boinc.berkeley.edu/wiki/PreferencesXml">link</a> 
 
 For our MVP we configure the below fields:
 
-a. <max_ncpus_pct>100.000000</max_ncpus_pct>
+a. <max_ncpus_pct>70.000000</max_ncpus_pct>
 
 b. <vm_max_used_pct>75.000000</vm_max_used_pct>
 
@@ -82,15 +85,16 @@ Total CPU of Node: "/sys/fs/cgroup/cpu/cpu.rt_period_us" is found in this file
 
 Cgroup cpu limit: /sys/fs/cgroup/cpu/cpu.cfs_quota_us" is found in this file
 
-We need both because it has to be passed as percentage to BOINC preference file. We created a “global_prefs_override.xml”. BOINC overrides its default setting if it finds this file exists in the same directory where it starts
+We need both because it has to be passed as percentage to BOINC preference file. We create a “global_prefs_override.xml”. BOINC overrides its default setting if it finds this file exists in the same directory where it starts. 
 
 * 2. Changing the way BOINC sees node utilization:
-On local machines, since BOINC is running on the same kernel as other applications, it can see all the running processes and utilization. Boinc calculates the process utilization for BOINC-processes and non-BOINC processes and suspends itself if the non-BOINC utilization is high. This way does not work when boinc runs inside a container because it can only see processes running inside the container. However, any process inside a container can see node-level utilization. We use this information to change the way BOINC calculates non-BOINC utilization. 
+On local machines, since BOINC is running on the same kernel as other applications, it can see all the running processes and utilization. Boinc calculates the process utilization for BOINC-processes and non-BOINC processes and suspends itself if the non-BOINC utilization is high. This way does not work when boinc runs inside a container because it can only see processes running inside the container. However, any process inside a container can see node-level utilization in proc/stat. We use this information to change the way BOINC calculates non-BOINC utilization.
 
-* Our method:
+* Our method : 
 Non-boinc utilization = total node utilization - boinc utilization
 
-To simulate existing workload running on the cluster, we have used the Linux utility called sysbench. Sysbench runs in a container on the cluster, acting as the primary workload and BOINC's priority will be to not harm the performance of sysbench. 
+
+To simulate existing workload (primary application) running on the cluster, we have used the Linux utility called sysbench. Sysbench runs in a container on the cluster, acting as the primary workload and BOINC's priority will be to not harm the performance of sysbench. 
 
 ### Acceptance criteria
 * BOINC image that can be successfully deployed on MOC.
