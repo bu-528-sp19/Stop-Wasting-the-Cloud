@@ -15,6 +15,7 @@ To use this, copy cgroup.py, boinc and Dockerfile_newBOINC (rename it "Dockerfil
  You can build it in two ways
 
 Locally:
+
 `docker login`
 
 `docker build -t <dockerhub_userid>/<imagename> .`
