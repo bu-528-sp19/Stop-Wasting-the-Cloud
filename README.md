@@ -1,7 +1,7 @@
 ### Documentation
 
 - [Vision and Goals Of The Project](#vision-and-goals-of-the-project)
--[Technology Stack](#technology-stack)
+- [Technology Stack](#technology-stack)
 - [Users/Personas Of The Project](#users/personas-of-the-project)
 - [Scope](#scope)
 - [Solution Concept](#solution-concept)
