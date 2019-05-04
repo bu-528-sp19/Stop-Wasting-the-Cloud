@@ -84,7 +84,7 @@ We use a daemonset because it fits our use-case perfectly. A daemonset ensures t
 
 **How we configured BOINC :** 
 
-* 1. EEnsure BOINC takes up task according to the Cgroup: BOINC runs CPU benchmarking when it starts and requests task from BOINC server accordingly. It has various fields which can be configured. A detailed explanation can be found in the following <a href="https://boinc.berkeley.edu/wiki/PreferencesXml">link</a> 
+* 1. Ensure BOINC takes up task according to the Cgroup: BOINC runs CPU benchmarking when it starts and requests task from BOINC server accordingly. It has various fields which can be configured. A detailed explanation can be found in the following <a href="https://boinc.berkeley.edu/wiki/PreferencesXml">link</a> 
 
 For our MVP we configure the below fields:
 
