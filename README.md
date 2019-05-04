@@ -1,3 +1,7 @@
+
+### Vision and Goals Of The Project:
+
+
 <p align="center">
 <img src="https://github.com/Jhukhirtha/Stop-Wasting-the-Cloud/blob/master/Poc.jpeg">
 </p>
