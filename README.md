@@ -160,9 +160,9 @@ To simulate existing workload (primary application) running on the cluster, we h
 
 Please follow the instructions in the readme of <a href="https://github.com/bu-528-sp19/Stop-Wasting-the-Cloud/tree/master/Deployments">Deployment</a> folder
 
-### <a href"https://drive.google.com/open?id=1WmiXNbAsgxovmhsvIOMmb0FYRcSRYj9U">Video URL</a>
+### <a href="https://drive.google.com/open?id=1WmiXNbAsgxovmhsvIOMmb0FYRcSRYj9U">Video URL</a>
 
-Please find the video URL explaining the project in detail. Please download
+Please find the video <a href="https://drive.google.com/open?id=1WmiXNbAsgxovmhsvIOMmb0FYRcSRYj9U">URL</a>explaining the project in detail. Please download
 
 ### Mentors:
 * <a href="https://www.linkedin.com/in/daniel-mcpherson-46887912/">Daniel McPherson</a>
