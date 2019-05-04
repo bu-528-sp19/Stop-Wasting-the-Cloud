@@ -1,6 +1,16 @@
+### Documentation
+
+- [Vision and Goals Of The Project](#vision-and-goals-of-the-project)
+-[Technology Stack](#technology-stack)
+- [Users/Personas Of The Project](#users/personas-of-the-project)
+- [Scope](#scope)
+- [Solution Concept](#solution-concept)
+- [Acceptance Criteria](#acceptance-criteria)
+- [Release Planning](#release-planning)
+- [Contributors](#contributors)
+
 
 ### Vision and Goals Of The Project:
-
 
 <p align="center">
 <img src="https://github.com/Jhukhirtha/Stop-Wasting-the-Cloud/blob/master/Poc.jpeg">
