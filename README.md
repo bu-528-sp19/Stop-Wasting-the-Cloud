@@ -84,23 +84,23 @@ We use a daemonset because it fits our use-case perfectly. A daemonset ensures t
 
 **How we configured BOINC :** 
 
-* 1. Ensure BOINC takes up task according to the Cgroup: BOINC runs CPU benchmarking when it starts and requests task from BOINC server accordingly. It has various fields which can be configured. A detailed explanation can be found in the following <a href="https://boinc.berkeley.edu/wiki/PreferencesXml">link</a> 
+* Ensure BOINC takes up task according to the Cgroup: BOINC runs CPU benchmarking when it starts and requests task from BOINC server accordingly. It has various fields which can be configured. A detailed explanation can be found in the following <a href="https://boinc.berkeley.edu/wiki/PreferencesXml">link</a> 
 
 For our MVP we configure the below fields:
 
-a. <max_ncpus_pct>70.000000</max_ncpus_pct>
+<max_ncpus_pct>
 
-b. <vm_max_used_pct>75.000000</vm_max_used_pct>
+<ram_max_used_busy_pct>
 
 We pass these changes to BOINC preference via python script.
 
-Total CPU of Node: "/sys/fs/cgroup/cpu/cpu.rt_period_us" is found in this file
+Total CPU of Node: **"/sys/fs/cgroup/cpu/cpu.rt_period_us"**is found in this file
 
-Cgroup cpu limit: /sys/fs/cgroup/cpu/cpu.cfs_quota_us" is found in this file
+Cgroup cpu limit: **"/sys/fs/cgroup/cpu/cpu.cfs_quota_us"** is found in this file
 
 We need both because it has to be passed as percentage to BOINC preference file. We create a “global_prefs_override.xml”. BOINC overrides its default setting if it finds this file exists in the same directory where it starts. 
 
-* 2. Changing the way BOINC sees node utilization:
+* Changing the way BOINC sees node utilization:
 On local machines, since BOINC is running on the same kernel as other applications, it can see all the running processes and utilization. Boinc calculates the process utilization for BOINC-processes and non-BOINC processes and suspends itself if the non-BOINC utilization is high. This way does not work when boinc runs inside a container because it can only see processes running inside the container. However, any process inside a container can see node-level utilization in proc/stat. We use this information to change the way BOINC calculates non-BOINC utilization.
 
 * Our method : 
