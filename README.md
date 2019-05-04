@@ -106,9 +106,9 @@ On local machines, since BOINC is running on the same kernel as other applicatio
 * Our method : 
 Non-boinc utilization = total node utilization - boinc utilization
 
-The changes in the boinc code reside in a fork of boinc which can be found <a href = "https://github.com/anshugoe/boinc">here</a>
-To pinpoint the changes, <a href = "https://github.com/BOINC/boinc/blob/master/client/app.cpp#L501">here</a> is the line in original boinc's code.
-The same code is changed in our boinc <a href = "https://github.com/anshugoe/boinc/blob/master/client/app.cpp#L511">here</a>
+The changes in the boinc code reside in a fork of boinc which can be found <a href = "https://github.com/anshugoe/boinc">here</a>  
+To pinpoint the changes, <a href = "https://github.com/BOINC/boinc/blob/master/client/app.cpp#L501">here</a> is the line in original boinc's code.  
+The same code is changed in our boinc <a href = "https://github.com/anshugoe/boinc/blob/master/client/app.cpp#L511">here</a>  
 
 To simulate existing workload (primary application) running on the cluster, we have used the Linux utility called sysbench. Sysbench runs in a <a href="https://github.com/VedantMahabaleshwarkar/SysbenchContainer">container</a> on the cluster, acting as the primary workload and BOINC's priority will be to not harm the performance of sysbench. 
 
