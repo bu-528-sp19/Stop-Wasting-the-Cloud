@@ -16,7 +16,9 @@ To use this, copy cgroup.py, boinc and Dockerfile_newBOINC (rename it "Dockerfil
 
 Locally:
 `docker login`
+
 `docker build -t <dockerhub_userid>/<imagename> .`
+
 `docker push <dockerhub_userid>/<imagename>`
 
 On Docker Hub:

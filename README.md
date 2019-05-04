@@ -7,6 +7,9 @@
 - [Solution Concept](#solution-concept)
 - [Acceptance Criteria](#acceptance-criteria)
 - [Release Planning](#release-planning)
+- [User Manual](#user-manual)
+- [Video](#video-url)
+- [Mentors](#mentors)
 - [Contributors](#contributors)
 
 
@@ -153,10 +156,23 @@ To simulate existing workload (primary application) running on the cluster, we h
 
 * Make changes in BOINC's source code so that it successfully reads the non-BOINC utilization on the node and suspends accordingly. 
 
+#### User Manual
+
+Please follow the instructions in the readme of <a href="https://github.com/bu-528-sp19/Stop-Wasting-the-Cloud/tree/master/Deployments">Deployment</a> folder
+
+### Video URL
+
+Please find the video URL explaining the project in detail
+
+### Mentors:
+* <a href="https://www.linkedin.com/in/daniel-mcpherson-46887912/">Daniel McPherson</a>
+* <a href="https://www.linkedin.com/in/patrick-dillon/">Patrick Dillon</a>
+
 ### Contributors:
-* Anshu Goel
-* Jhukhirtha Marhi Arokiasamy.
-* Sahil Gupta
-* Sidharth Bakshi
-* Vedant Mahabaleshwarkar
+* <a href="https://www.linkedin.com/in/anshu-goel-914626113/">Anshu Goel</a>
+* <a href="https://www.linkedin.com/in/jhukhirtha-marhi/">Jhukhirtha Marhi Arokiasamy</a>
+* <a href="https://www.linkedin.com/in/sahil-gupta1993/">Sahil Gupta</a>
+* <a href="https://www.linkedin.com/in/siddharth-bakshi/">Siddharth Bakshi</a>
+* <a href="https://www.linkedin.com/in/vedantmahabaleshwarkar/">Vedant Mahabaleshwarkar</a>
+
 
