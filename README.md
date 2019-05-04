@@ -92,9 +92,11 @@ For our MVP we configure the below fields:
 
 <ram_max_used_busy_pct>
 
-We pass these changes to BOINC preference via python script.
+<suspend_cpu_usage>
 
-Total CPU of Node: **"/sys/fs/cgroup/cpu/cpu.rt_period_us"**is found in this file
+We pass these changes to BOINC preference via python script (cgroup.py).
+
+Total CPU of Node: **"/sys/fs/cgroup/cpu/cpu.rt_period_us"** is found in this file
 
 Cgroup cpu limit: **"/sys/fs/cgroup/cpu/cpu.cfs_quota_us"** is found in this file
 
